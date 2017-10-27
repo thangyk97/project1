@@ -5,7 +5,7 @@ def compute_cost(X, y, theta):
     Compute cost of y predict with 'theta' and 'y' 
     Parameters
     ----------
-    X : input
+    X : features
     y : label (outcome)
     theta : weight
 
@@ -24,7 +24,7 @@ def gradient_descent(X, y, theta, alpha, iters):
     """
     Parameters
     ----------
-    X : input
+    X : features
     y : label (outcome)
     theta : init weight 
     alpha : learning rate
