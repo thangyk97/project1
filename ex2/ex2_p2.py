@@ -16,7 +16,7 @@ print data.head()
 positive = data[data['Accepted'].isin([1])]
 negative = data[data['Accepted'].isin([0])]
 
-fig, ax = plt.subplots(figsize=(12,8))
+fig, ax = plt.subplots()
 ax.scatter(positive['Test 1'], positive['Test 2'], s=50, 
            c='b', marker='o', label='positive')
 ax.scatter(negative['Test 1'], negative['Test 2'], s=50, 
