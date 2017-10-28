@@ -6,20 +6,21 @@ import os
 
 import module_ex2 as ex2
 
-data = pd.read_csv('ex2data1.txt', header=None, names=['Exam_1', 'Exam_2', 'Admitted'])
-
+data = pd.read_csv('ex2data1.txt', header=None,
+                   names=['Exam_1', 'Exam_2', 'Admitted'])
+# Show data header
 positive = data[data['Admitted'].isin([1])]
 negative = data[data['Admitted'].isin([0])]
 
-# add a ones column
+# Add a ones column
 data.insert(0,'Bias', 1)
 
-# set X (training data) and y ( target variable)
+# Set X (training data) and y ( target variable)
 cols = data.shape[1]
 X = data.iloc[:,0:cols-1]
 y = data.iloc[:,cols-1:cols]
 
-# convert to numpy arrays and initalize the parameter array theta
+# Convert to numpy arrays and initalize the parameter array theta
 X = np.array(X.values)
 y = np.array(y.values)
 theta = np.zeros(3)
@@ -28,7 +29,8 @@ result = opt.fmin_tnc(func=ex2.cost, x0=theta, fprime=ex2.gradient, args=(X,y) )
 
 theta_min = np.matrix(result[0])
 predictions = ex2.predict(theta_min, X)
-# print predictions
+
+# Print predictions
 correct = [1 if ((a == 1 and b == 1) or (a==0 and b == 0)) else 0
            for (a,b) in zip(predictions, y)]
 accurancy = (sum(map(int, correct)) % len(correct))
