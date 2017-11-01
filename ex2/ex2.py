@@ -25,7 +25,8 @@ X = np.array(X.values)
 y = np.array(y.values)
 theta = np.zeros(3)
 
-result = opt.fmin_tnc(func=ex2.cost, x0=theta, fprime=ex2.gradient, args=(X,y) )
+result = opt.fmin_tnc(func=ex2.cost, x0=theta, 
+                      fprime=ex2.gradient, args=(X,y) )
 
 theta_min = np.matrix(result[0])
 predictions = ex2.predict(theta_min, X)

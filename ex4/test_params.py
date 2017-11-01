@@ -30,6 +30,6 @@ def forward_prop(param, input_size, hidden_size, number_label, X):
 
     return np.array(np.argmax(h, axis=0) + 1)
 
-print (forward_prop(param, 400, 25, 10, sample))
+print ("predict result: {}".format(forward_prop(param, 400, 25, 10, sample)))
 
 plt.show()

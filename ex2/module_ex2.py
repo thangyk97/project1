@@ -53,7 +53,7 @@ def gradient(theta, X, y):
 
     for i in range(theta.shape[1]): # Loop with all theta_i
         term = np.multiply(J, X[:,i]) # (h_theta(X*theta') - y)*X[:,i]
-        grad[i] = np.sum(term) / len(X)
+        grad[0,i] = np.sum(term) / len(X)
     # End for
     return grad
 
@@ -120,6 +120,7 @@ def gradientReg(theta, X, y, lambda_var):
         if (i == 0):
             grad[i] = np.sum(term) / len(X)
         else:
+            # 
             grad[i] = (np.sum(term) / len(X)) + ((lambda_var / len(X)) * theta[:,i])
 
     return grad

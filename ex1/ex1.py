@@ -48,6 +48,6 @@ fig, ax = plt.subplots(figsize=(12,8))
 ax.plot(np.arange(iters), cost, 'r')
 ax.set_xlabel('Iterations')
 ax.set_ylabel('Cost')
-ax.set_title('Error vs. Training Epoch')
+ax.set_title('Error vs. Training Epoch aaa')
 
 plt.show()

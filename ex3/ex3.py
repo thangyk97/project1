@@ -2,20 +2,11 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
 from scipy.io import loadmat
-###################################################################################
-#########################
-###################################################################################
-data = loadmat('ex3data1.mat')
+from scipy.optimize import minimize
 
-###################################################################################
-###################### SIGMOID FUNCTION
-###################################################################################
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
-###################################################################################
-###################### COST FUNCTION
-###################################################################################
 def cost(theta, X, y, learningRate):
     theta = np.matrix(theta)
     X = np.matrix(X)
@@ -25,10 +16,6 @@ def cost(theta, X, y, learningRate):
     reg = (learningRate / (2 * len(X))) * np.sum(np.power( theta[:, 1:theta.shape[1]], 2))
     return np.sum( first - second ) / (len(X)) + reg
 
-
-###################################################################################
-###################### GRADIENT WITH LOOP FUNCTION
-###################################################################################
 def gradient_with_loop (theta, X, y, learningRate):
     theta = np.matrix(theta)
     X     = np.matrix(X)
@@ -48,10 +35,6 @@ def gradient_with_loop (theta, X, y, learningRate):
 
     return grad
 
-
-###################################################################################
-###################### GRADIENT FUNCTION
-###################################################################################
 def gradient (theta, X, y, learningRate):
     theta = np.matrix( theta )
     X     = np.matrix( X )
@@ -65,13 +48,6 @@ def gradient (theta, X, y, learningRate):
     grad[0,0] = np.sum(np.multiply( error, X[:, 0])) / len( X )
 
     return np.array(grad).ravel()
-
-
-
-###################################################################################
-###################### ONE VS ALL FUNCTION
-###################################################################################
-from scipy.optimize import minimize
 
 def one_vs_all(X, y, num_labels, learning_rate):
     rows = X.shape[0]
@@ -95,10 +71,6 @@ def one_vs_all(X, y, num_labels, learning_rate):
     
     return all_theta
 
-
-###################################################################################
-######################### PREDICT_ALL FUNCTION
-###################################################################################
 def predict_all(X, all_theta):
     rows = X.shape[0]
     params = X.shape[1]
@@ -122,9 +94,9 @@ def predict_all(X, all_theta):
 
     return h_argmax
 
-###################################################################################
-######################### RESULT
-###################################################################################
+"""======================= Main ===================="""
+
+data = loadmat('ex3data1.mat')
 all_theta = one_vs_all(data['X'], data['y'], 10, 1)
 y_pred = predict_all(data['X'], all_theta)
 correct = [1 if a==b else 0 for (a, b) in zip(y_pred, data['y'])]
