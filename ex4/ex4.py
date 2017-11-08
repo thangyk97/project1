@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score
 import module_ex4 as ex4
 
 """======================= Main ============================"""
-data = loadmat('../ex3/ex3data1.mat')
+data = loadmat('ex3data1.mat')
 X_data = data['X']
 y_data = data['y']
 
@@ -44,18 +44,18 @@ init_theta_size = hidden_size * (input_size + 1) + \
 init_theta = np.random.random(size=init_theta_size) * \
              2 * epsilon_init - epsilon_init
 
-J, grad = back_propagate(init_theta, input_size, hidden_size, 
+J, grad = ex4.back_propagate(init_theta, input_size, hidden_size, 
                          number_labels, X, y_one_hot, 
                          learning_rate)
 fmin = minimize(
-    fun = back_propagate, 
+    fun = ex4.back_propagate, 
     x0 = init_theta,
     args=(input_size, hidden_size, number_labels, 
           X, y_one_hot, learning_rate),
     method='TNC',
     jac=True, 
     options={'maxiter': 250})
-a1, z2, a2, z3, h = forward_propagate(fmin.x, input_size, 
+a1, z2, a2, z3, h = ex4.forward_propagate(fmin.x, input_size, 
                                       hidden_size, number_labels, 
                                       X_test)  
 y_pred = np.array(np.argmax(h, axis=1) + 1)  
